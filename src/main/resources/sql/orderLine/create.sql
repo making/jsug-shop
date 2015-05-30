@@ -1,0 +1,1 @@
+INSERT INTO order_line (order_id, line_no, goods_id, quantity) VALUES (:orderId, :lineNo, :goodsId, :quantity);

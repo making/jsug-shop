@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org" level="WARN"/>
+    <logger name="jdbc" level="ERROR"/>
+    <!-- SQLログを見たい場合は以下のコメントアウトをはずす -->
+    <!--<logger name="jdbc.sqltiming" level="DEBUG"/>-->
+    <!-- SELECTの結果を見たい場合は以下のコメントアウトをはずす -->
+    <!--<logger name="jdbc.resultsettable" level="DEBUG"/>-->
+</configuration>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ユーザー登録</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/wro.css}" href="../../static/css/wro.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}"><span></span></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/}" href="../goods/showGoods.html">ホーム</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div class="container">
+    <h1>ユーザー登録完了</h1>
+
+    <p>
+        ようこそ <span th:text="${account.name}">ほげ</span>さん。<br/>
+        <a th:href="@{/loginForm}" href="../login/loginForm.html">こちら</a>からログインしてください。
+    </p>
+</div>
+</body>
+</html>

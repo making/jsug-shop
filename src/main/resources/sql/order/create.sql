@@ -1,0 +1,1 @@
+INSERT INTO ordr (order_id, email, order_date) VALUES (:orderId, :email, :orderDate)

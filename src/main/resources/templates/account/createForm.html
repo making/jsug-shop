@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ユーザー登録</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/wro.css}" href="../../static/css/wro.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}"><span></span></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/}" href="../goods/showGoods.html">ホーム</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div class="container">
+
+    <form th:action="@{/account/create}" action="createFinish.html" th:object="${accountForm}" method="post"
+          class="form-horizontal">
+
+        <h1>ユーザー登録</h1>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+            <label for="name" class="col-sm-2 control-label">名前</label>
+
+            <div class="col-sm-6">
+                <input id="name" type="text" class="form-control" th:field="*{name}" name="name"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                      class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+            <label for="email" class="col-sm-2 control-label">E-mail</label>
+
+            <div class="col-sm-6">
+                <input id="email" type="email" class="form-control" th:field="*{email}" name="email"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+            <label for="password" class="col-sm-2 control-label">パスワード</label>
+
+            <div class="col-sm-6">
+                <input id="password" type="password" class="form-control" th:field="*{password}" name="password"/>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error'">
+            <label for="confirmPassword" class="col-sm-2 control-label">パスワード(確認)</label>
+
+            <div class="col-sm-6">
+                <input id="confirmPassword" type="password" class="form-control" th:field="*{confirmPassword}"
+                       name="confirmPassword"/>
+            <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('birthDay')}? 'has-error'">
+            <label for="birthDay" class="col-sm-2 control-label">生年月日</label>
+
+            <div class="col-sm-6">
+                <input id="birthDay" type="date" class="form-control" th:field="*{birthDay}" name="birthDay"/>
+            <span th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('zip')}? 'has-error'">
+            <label for="zip" class="col-sm-2 control-label">郵便番号</label>
+
+            <div class="col-sm-6">
+                <input id="zip" type="text" class="form-control" th:field="*{zip}" name="zip"/>
+            <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+            <label for="address" class="col-sm-2 control-label">住所</label>
+
+            <div class="col-sm-6">
+                <input id="address" type="text" class="form-control" th:field="*{address}" name="address"/>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+                  class="help-block">error!</span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-default" value="新規登録"/>
+    </form>
+</div>
+</body>
+</html>

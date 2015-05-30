@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ログイン</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/wro.css}" href="../../static/css/wro.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}"><span></span></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/}" href="../goods/showGoods.html">ホーム</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div class="container">
+    <h2>ログインフォーム</h2>
+
+    <div th:if="${param.error}" class="alert alert-danger">
+        ユーザー名またはパスワードが正しくありません。
+    </div>
+    <form method="post" th:action="@{/login}" action="../goods/showGoods.html" class="form-inline">
+        <input type="text" name="username" class="form-control" placeholder="E-mail" required="required"
+               autofocus="autofocus"/>
+        <input type="password" name="password" class="form-control" placeholder="パスワード" required="required"/>
+        <button type="submit" class="btn btn-default">ログイン</button>
+    </form>
+    <p>
+        アカウントをお持ちでない場合は<a th:href="@{/account/create(form)}" href="../account/createForm.html">こちら</a>から作成してください。
+    </p>
+</div>
+</body>
+</html>
