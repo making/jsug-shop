@@ -4,23 +4,26 @@ import jsug.domain.model.Cart;
 import jsug.infra.cart.CachingCart;
 import net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
 
 @Configuration
 @EnableCaching
+@EnableRedisHttpSession
 public class AppConfig {
     @Autowired
     DataSourceProperties dataSourceProperties;
@@ -43,13 +46,8 @@ public class AppConfig {
     }
 
     @Bean
-    CacheManager cacheManager() {
-        SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(Arrays.asList(
-                new ConcurrentMapCache("category"),
-                new ConcurrentMapCache("goods"),
-                new ConcurrentMapCache("orderLines"),
-                new ConcurrentMapCache("sql")));
-        return cacheManager;
+    CacheManager cacheManager(@Qualifier("redisTemplate") RedisOperations<Object, Object> redisOperations) {
+        return new RedisCacheManager((RedisTemplate) redisOperations);
     }
+
 }
