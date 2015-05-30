@@ -5,11 +5,13 @@ import jsug.domain.model.Category;
 import jsug.domain.model.Goods;
 import jsug.domain.model.OrderLine;
 import jsug.domain.service.category.CategoryService;
+import jsug.domain.service.goods.GoodsNotFoundException;
 import jsug.domain.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,5 +61,11 @@ public class GoodsController {
                 .quantity(form.getQuantity())
                 .build());
         return "redirect:/cart";
+    }
+
+    @ExceptionHandler(GoodsNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String handleGoodsNotFoundException() {
+        return "goods/notFound";
     }
 }
