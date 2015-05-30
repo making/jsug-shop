@@ -3,6 +3,7 @@ package jsug.domain.service.goods;
 import jsug.domain.model.Goods;
 import jsug.domain.repository.goods.GoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,14 @@ public class GoodsService {
     GoodsRepository goodsRepository;
 
     @Transactional(readOnly = true)
+    @Cacheable("goods")
     public Goods findOne(UUID goodsId) {
         return goodsRepository.findOne(goodsId)
                 .orElseThrow(GoodsNotFoundException::new);
     }
 
     @Transactional(readOnly = true)
+    @Cacheable("goods")
     public Page<Goods> findByCategoryId(int categoryId, Pageable pageable) {
         return goodsRepository.findByCategoryId(categoryId, pageable);
     }
