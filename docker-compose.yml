@@ -1,0 +1,18 @@
+redis:
+  image: redis
+h2:
+  image: making/h2-server
+shop:
+  build: .
+  # image: making/jsug-shop
+  ports:
+    - "8080:8080"
+  links:
+    - redis
+    - h2
+  command: >
+    --spring.thymeleaf.cache=true
+    --logging.level.jdbc.resultsettable=ERROR
+    --logging.level.jdbc.sqltiming=ERROR
+    --logging.level.org=WARN
+    --spring.datasource.url=jdbc:h2:tcp://${H2_PORT_1521_TCP_ADDR}:${H2_PORT_1521_TCP_PORT}/~/jsug-shop
