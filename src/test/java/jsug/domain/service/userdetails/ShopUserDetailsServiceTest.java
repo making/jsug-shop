@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ import static org.hamcrest.CoreMatchers.*;
         "/sql/drop-tables.sql",
         "/db/migration/V1__create-schema.sql",
         "/sql/insert-accounts.sql"
-})
+}, config = @SqlConfig(encoding = "UTF-8"))
 public class ShopUserDetailsServiceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
