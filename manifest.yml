@@ -1,0 +1,9 @@
+---
+applications:
+- name: jsug-shop
+  memory: 1G
+  random-route: true
+  path: target/jsug-shop-1.0-SNAPSHOT.jar
+  services:
+   - shop-db
+   - shop-redis

@@ -1,18 +1,14 @@
-## Run prepared demo app
-
-    docker run -d --name redis -p 6379:6379 redis
-    docker run -ti --rm --link redis:redis -p 8080:8080 making/jsug-shop
-
-or
-
-    docker-compose up
-
-## Build your own Docker image
-
     mvn clean package
-    docker build -t username/jsug-shop
 
-After building the image,
+### Deploy to Pivotal Web Services
 
-    docker run -d --name redis -p 6379:6379 redis
-    docker run -ti --rm --link redis:redis -p 8080:8080 username/jsug-shop
+    cf create-service cleardb spark shop-db
+    cf create-service rediscloud 30mb shop-redis
+    cf push
+
+
+### Deploy to Pivotal Cloud Foundry
+
+    cf create-service p-mysql 100mb-dev shop-db
+    cf create-service p-redis shared-vm shop-redis
+    cf push
