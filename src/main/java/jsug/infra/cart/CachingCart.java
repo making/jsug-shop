@@ -53,7 +53,7 @@ public class CachingCart extends Cart {
         // そのため、リクエストコンテキストから毎度ApplicationContextを取得して、
         // CacheManagerを取得している。
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        ApplicationContext context = RequestContextUtils.getWebApplicationContext(attributes.getRequest());
+        ApplicationContext context = RequestContextUtils.findWebApplicationContext(attributes.getRequest());
         CacheManager cacheManager = context.getBean(CacheManager.class);
         Cache cache = cacheManager.getCache("orderLines");
         return cache;
